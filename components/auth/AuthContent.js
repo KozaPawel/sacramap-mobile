@@ -29,10 +29,19 @@ function AuthContent({ isLogin, onAuthenticate }) {
     password = password.trim();
 
     const emailIsValid = email.includes("@");
-    const passwordIsValid = password.length > 6;
+    const passwordIsValid =
+      password.length > 6 && /\d/.test(password) && /\w/.test(password);
     const passwordsAreEqual = password === confirmPassword;
 
     if (!emailIsValid || !passwordIsValid || (!isLogin && !passwordsAreEqual)) {
+      if (!passwordIsValid) {
+        Alert.alert(
+          "Invalid password",
+          "Password needs to be at least 6 characters long, have at least 1 non alphanumeric character e.g. (! or $) and 1 digit ('0'-'9')."
+        );
+
+        return;
+      }
       Alert.alert("Invalid input", "Please check your entered credentials.");
       setCredentialsInvalid({
         email: !emailIsValid,
