@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as SplashScreen from "expo-splash-screen";
-import { useState, useContext, useEffect, useCallback } from "react";
+import { useContext, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -8,6 +8,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "./screens/LoginScreen";
 import SignupScreen from "./screens/SignupScreen";
 import MapScreen from "./screens/MapScreen";
+import SearchScreen from "./screens/SearchScreen";
 import IconButton from "./components/ui/IconButton";
 import AuthContextProvider, { AuthContext } from "./store/auth-context";
 import { Colors } from "./constants/colors";
@@ -54,6 +55,7 @@ function AuthenticatedStack() {
           ),
         }}
       />
+      <Stack.Screen name="Search" component={SearchScreen} />
     </Stack.Navigator>
   );
 }
