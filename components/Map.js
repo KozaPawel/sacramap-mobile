@@ -1,13 +1,24 @@
 import MapView from "react-native-map-clustering";
-import { useEffect, useRef } from "react";
-import { StyleSheet, DeviceEventEmitter } from "react-native";
+import { useEffect, useRef, useState } from "react";
+import {
+  StyleSheet,
+  DeviceEventEmitter,
+  View,
+  Text,
+  useWindowDimensions,
+  Modal,
+} from "react-native";
 import { Marker } from "react-native-maps";
 import { useNavigation } from "@react-navigation/native";
 
 import LoadingOverlay from "../components/ui/LoadingOverlay";
 import FloatingButton from "./ui/FloatingButton";
+import ChurchInfoModal from "./ui/ChurchInfoModal";
 
 function Map({ churches }) {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalData, setModalData] = useState([]);
+
   useEffect(() => {
     DeviceEventEmitter.addListener("event.churchClicked", (eventData) =>
       goToLocation(eventData.item)
@@ -27,11 +38,22 @@ function Map({ churches }) {
     });
   }
 
+  function showModal(data) {
+    setModalVisible(true);
+    setModalData(data);
+  }
+
   if (churches.length === 0) {
     return <LoadingOverlay message="Fetching all churchess..." />;
   } else {
     return (
       <>
+        <ChurchInfoModal
+          data={modalData}
+          isVisible={modalVisible}
+          closeModal={() => setModalVisible(false)}
+        />
+
         <MapView
           ref={mapRef}
           style={styles.map}
@@ -53,11 +75,8 @@ function Map({ churches }) {
               <Marker
                 key={index}
                 coordinate={coords}
-                title={church.name}
-                description={
-                  church.street + ", " + church.postalCode + " " + church.city
-                }
                 tracksViewChanges={false}
+                onPress={() => showModal(church)}
               />
             );
           })}
