@@ -1,25 +1,27 @@
-import { StyleSheet, Text, View } from "react-native";
+import { useEffect, useState } from "react";
+import { Alert } from "react-native";
+
+import Map from "../components/Map";
+import { fetchAllChurches } from "../util/fetch";
 
 function MapScreen() {
-  return (
-    <View style={styles.rootContainer}>
-      <Text style={styles.title}>Map screen</Text>
-    </View>
-  );
+  const [churches, setChurches] = useState([]);
+
+  useEffect(() => {
+    getChurches();
+  }, []);
+
+  async function getChurches() {
+    try {
+      const allChurches = await fetchAllChurches();
+
+      setChurches(allChurches);
+    } catch (error) {
+      Alert.alert("Could not fetch churches");
+    }
+  }
+
+  return <Map churches={churches} />;
 }
 
 export default MapScreen;
-
-const styles = StyleSheet.create({
-  rootContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 32,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 8,
-  },
-});
