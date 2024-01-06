@@ -6,9 +6,10 @@ import {
   ActivityIndicator,
 } from "react-native";
 import Modal from "react-native-modal";
-import Button from "./Button";
-import { addVisitedChurch } from "../../util/post";
 import { useContext, useState } from "react";
+
+import Button from "./ui/Button";
+import { addVisitedChurch } from "../../util/post";
 import { AuthContext } from "../../store/auth-context";
 import { Colors } from "../../constants/colors";
 

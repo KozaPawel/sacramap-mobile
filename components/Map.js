@@ -1,19 +1,12 @@
 import MapView from "react-native-map-clustering";
 import { useEffect, useRef, useState } from "react";
-import {
-  StyleSheet,
-  DeviceEventEmitter,
-  View,
-  Text,
-  useWindowDimensions,
-  Modal,
-} from "react-native";
+import { StyleSheet, DeviceEventEmitter } from "react-native";
 import { Marker } from "react-native-maps";
 import { useNavigation } from "@react-navigation/native";
 
 import LoadingOverlay from "../components/ui/LoadingOverlay";
 import FloatingButton from "./ui/FloatingButton";
-import ChurchInfoModal from "./ui/ChurchInfoModal";
+import ChurchInfoModal from "./ChurchInfoModal";
 
 function Map({ churches }) {
   const [modalVisible, setModalVisible] = useState(false);
