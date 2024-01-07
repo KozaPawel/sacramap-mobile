@@ -4,13 +4,16 @@ import {
   useWindowDimensions,
   StyleSheet,
   ActivityIndicator,
+  Alert,
 } from "react-native";
 import Modal from "react-native-modal";
-import Button from "./Button";
-import { addVisitedChurch } from "../../util/post";
 import { useContext, useState } from "react";
-import { AuthContext } from "../../store/auth-context";
-import { Colors } from "../../constants/colors";
+
+import Button from "./ui/Button";
+import { addVisitedChurch } from "../util/post";
+import { refreshToken } from "../util/refreshToken";
+import { AuthContext } from "../store/auth-context";
+import { Colors } from "../constants/colors";
 
 function ChurchInfoModal({ data, isVisible, closeModal }) {
   const { width, height } = useWindowDimensions();
@@ -18,17 +21,30 @@ function ChurchInfoModal({ data, isVisible, closeModal }) {
 
   const authCtx = useContext(AuthContext);
 
+  function successAlert() {
+    Alert.alert("Successfully added new visitation");
+  }
+
   async function addChurch(churchId) {
     setIsSending(true);
 
     try {
       await addVisitedChurch(churchId, authCtx.token);
-      closeModal();
+      successAlert();
     } catch (error) {
-      console.log(error);
+      if (error.response?.status === 401) {
+        const newTokens = await refreshToken(authCtx.refreshToken);
+        authCtx.authenticate(newTokens.accessToken, newTokens.refreshToken);
+
+        await addVisitedChurch(churchId, newTokens.accessToken);
+        successAlert();
+      } else {
+        Alert.alert("Could not store visited place.", "Please try again");
+      }
     }
 
     setIsSending(false);
+    closeModal();
   }
 
   return (

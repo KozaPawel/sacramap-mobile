@@ -3,26 +3,35 @@ import { createContext, useState } from "react";
 
 export const AuthContext = createContext({
   token: "",
+  refreshToken: "",
   isAuthenticated: false,
-  authenticate: (token) => {},
+  authenticate: (token, refreshToken) => {},
   logout: () => {},
 });
 
 function AuthContextProvider({ children }) {
   const [authToken, setAuthToken] = useState();
+  const [refreshToken, setRefreshToken] = useState();
 
-  function authenticate(token) {
+  function authenticate(token, refreshToken) {
     setAuthToken(token);
     AsyncStorage.setItem("token", token);
+
+    setRefreshToken(refreshToken);
+    AsyncStorage.setItem("refreshToken", refreshToken);
   }
 
   function logout() {
     setAuthToken(null);
     AsyncStorage.removeItem("token");
+
+    setRefreshToken(null);
+    AsyncStorage.removeItem("refreshToken");
   }
 
   const value = {
     token: authToken,
+    refreshToken: refreshToken,
     isAuthenticated: !!authToken,
     authenticate: authenticate,
     logout: logout,

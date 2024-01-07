@@ -3,7 +3,7 @@ import { Alert, StyleSheet, View } from "react-native";
 
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
-import ChurchesList from "../components/ui/ChurchesList";
+import ChurchesList from "../components/ChurchesList";
 import { fetchCityChurches } from "../util/fetch";
 
 function SearchScreen() {

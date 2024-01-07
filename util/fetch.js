@@ -13,3 +13,16 @@ export async function fetchCityChurches(city) {
 
   return response.data;
 }
+
+export async function fetchUserVisitations(userToken) {
+  const response = await axios.get(
+    env.API_URL + "/api/Visitation/user/visitations",
+    {
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    }
+  );
+
+  return response.data;
+}

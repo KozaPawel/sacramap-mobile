@@ -15,5 +15,5 @@ export async function login(email, password) {
     password: password,
   });
 
-  return response.data.accessToken;
+  return response.data;
 }
