@@ -110,9 +110,10 @@ function Root() {
       await SplashScreen.preventAutoHideAsync();
 
       const storedToken = await AsyncStorage.getItem("token");
+      const storedRefreshToken = await AsyncStorage.getItem("refreshToken");
 
-      if (storedToken) {
-        authCtx.authenticate(storedToken);
+      if (storedToken && storedRefreshToken) {
+        authCtx.authenticate(storedToken, storedRefreshToken);
       }
 
       SplashScreen.hideAsync();
