@@ -5,7 +5,7 @@ import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
 
 import LoginScreen from "./screens/LoginScreen";
 import SignupScreen from "./screens/SignupScreen";
@@ -64,7 +64,7 @@ function AuthenticatedStack() {
           title: "Map",
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="map-outline" color={color} size={size} />
+            <FontAwesome5 name="map" solid color={color} size={size} />
           ),
         }}
         component={MapStack}
@@ -74,16 +74,17 @@ function AuthenticatedStack() {
         options={{
           headerRightContainerStyle: { paddingRight: 15 },
           headerRight: ({ tintColor }) => (
-            <IconButton
-              icon="log-out-outline"
+            <FontAwesome5
+              name="sign-out-alt"
               color={tintColor}
               size={24}
               onPress={authCtx.logout}
             />
           ),
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person-outline" color={color} size={size} />
+            <FontAwesome5 name="user" solid color={color} size={size} />
           ),
+          unmountOnBlur: true,
         }}
         component={ProfileScreen}
       />

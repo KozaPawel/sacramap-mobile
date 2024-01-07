@@ -21,17 +21,23 @@ function ChurchInfoModal({ data, isVisible, closeModal }) {
 
   const authCtx = useContext(AuthContext);
 
+  function successAlert() {
+    Alert.alert("Successfully added new visitation");
+  }
+
   async function addChurch(churchId) {
     setIsSending(true);
 
     try {
       await addVisitedChurch(churchId, authCtx.token);
+      successAlert();
     } catch (error) {
       if (error.response?.status === 401) {
         const newTokens = await refreshToken(authCtx.refreshToken);
         authCtx.authenticate(newTokens.accessToken, newTokens.refreshToken);
 
         await addVisitedChurch(churchId, newTokens.accessToken);
+        successAlert();
       } else {
         Alert.alert("Could not store visited place.", "Please try again");
       }
