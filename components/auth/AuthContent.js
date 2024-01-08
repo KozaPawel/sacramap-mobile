@@ -34,7 +34,7 @@ function AuthContent({ isLogin, onAuthenticate }) {
     const passwordsAreEqual = password === confirmPassword;
 
     if (!emailIsValid || !passwordIsValid || (!isLogin && !passwordsAreEqual)) {
-      if (!passwordIsValid) {
+      if (!passwordIsValid && !isLogin) {
         Alert.alert(
           "Invalid password",
           "Password needs to be at least 6 characters long, have at least 1 non alphanumeric character e.g. (! or $) and 1 digit ('0'-'9')."

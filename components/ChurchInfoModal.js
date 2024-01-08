@@ -15,7 +15,7 @@ import { refreshToken } from "../util/refreshToken";
 import { AuthContext } from "../store/auth-context";
 import { Colors } from "../constants/colors";
 
-function ChurchInfoModal({ data, isVisible, closeModal }) {
+function ChurchInfoModal({ data, isVisible, closeModal, userMap }) {
   const { width, height } = useWindowDimensions();
   const [isSending, setIsSending] = useState(false);
 
@@ -65,13 +65,17 @@ function ChurchInfoModal({ data, isVisible, closeModal }) {
           <Text style={styles.churchInfo}>
             {data.street + ", " + data.postalCode + " " + data.city}
           </Text>
-          <Button isDisabled={isSending} onPress={() => addChurch(data.id)}>
-            {isSending ? (
-              <ActivityIndicator color={Colors.background} size="small" />
-            ) : (
-              "Mark as visited"
-            )}
-          </Button>
+          {userMap === true ? (
+            ""
+          ) : (
+            <Button isDisabled={isSending} onPress={() => addChurch(data.id)}>
+              {isSending ? (
+                <ActivityIndicator color={Colors.background} size="small" />
+              ) : (
+                "Mark as visited"
+              )}
+            </Button>
+          )}
         </View>
       </View>
     </Modal>
