@@ -23,12 +23,14 @@ function Map({ churches }) {
   const navigation = useNavigation();
 
   function goToLocation(church) {
-    mapRef.current.animateToRegion({
-      latitude: parseFloat(church.coordinats[0]),
-      longitude: parseFloat(church.coordinats[1]),
-      latitudeDelta: 0.03,
-      longitudeDelta: 0.03,
-    });
+    try {
+      mapRef.current.animateToRegion({
+        latitude: parseFloat(church.coordinats[0]),
+        longitude: parseFloat(church.coordinats[1]),
+        latitudeDelta: 0.03,
+        longitudeDelta: 0.03,
+      });
+    } catch (error) {}
   }
 
   function showModal(data) {
@@ -37,7 +39,7 @@ function Map({ churches }) {
   }
 
   if (churches.length === 0) {
-    return <LoadingOverlay message="Fetching all churchess..." />;
+    return <LoadingOverlay message="Fetching all churches..." />;
   } else {
     return (
       <>
@@ -78,7 +80,7 @@ function Map({ churches }) {
         <FloatingButton
           onPress={() => navigation.navigate("Search")}
           name="search-outline"
-        ></FloatingButton>
+        />
       </>
     );
   }

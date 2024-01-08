@@ -5,14 +5,14 @@ import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 import LoginScreen from "./screens/LoginScreen";
 import SignupScreen from "./screens/SignupScreen";
 import MapScreen from "./screens/MapScreen";
 import SearchScreen from "./screens/SearchScreen";
 import ProfileScreen from "./screens/ProfileScreen";
-import IconButton from "./components/ui/IconButton";
+import VisitedPlacesScreen from "./screens/VisitedPlacesScreen";
 import AuthContextProvider, { AuthContext } from "./store/auth-context";
 import { Colors } from "./constants/colors";
 
@@ -26,10 +26,19 @@ function AuthStack() {
         headerStyle: { backgroundColor: Colors.background },
         headerTintColor: Colors.text,
         contentStyle: { backgroundColor: Colors.background },
+        animation: "fade",
       }}
     >
-      <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="Signup" component={SignupScreen} />
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{ unmountOnBlur: true }}
+      />
+      <Stack.Screen
+        name="Signup"
+        component={SignupScreen}
+        options={{ unmountOnBlur: true }}
+      />
     </Stack.Navigator>
   );
 }
@@ -57,6 +66,7 @@ function AuthenticatedStack() {
       screenOptions={{
         tabBarActiveTintColor: Colors.text,
       }}
+      initialRouteName="MapTab"
     >
       <Tab.Screen
         name="MapTab"
@@ -87,6 +97,22 @@ function AuthenticatedStack() {
           unmountOnBlur: true,
         }}
         component={ProfileScreen}
+      />
+      <Tab.Screen
+        name="VisitedPlaces"
+        options={{
+          title: "Visited Places",
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome5
+              name="map-marked-alt"
+              solid
+              color={color}
+              size={size}
+            />
+          ),
+          unmountOnBlur: true,
+        }}
+        component={VisitedPlacesScreen}
       />
     </Tab.Navigator>
   );

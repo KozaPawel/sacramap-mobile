@@ -50,7 +50,7 @@ function ProfileScreen() {
     setIsFetching(false);
   }
 
-  if (visitations.length === 0 || isFetching) {
+  if (isFetching) {
     return <LoadingOverlay message="Fetching user data..." />;
   } else {
     return (
@@ -61,14 +61,18 @@ function ProfileScreen() {
               ? "Last 10 visitations"
               : `All visitations (${visitations.length})`}
           </Text>
-          <View style={styles.buttonContainer}>
-            <Button onPress={() => getVisitations(10)}>
-              {"10 visitations"}
-            </Button>
-            <Button onPress={() => getVisitations()}>
-              {"All visitations"}
-            </Button>
-          </View>
+          {visitations.length === 0 ? (
+            ""
+          ) : (
+            <View style={styles.buttonContainer}>
+              <Button onPress={() => getVisitations(10)}>
+                {"10 visitations"}
+              </Button>
+              <Button onPress={() => getVisitations()}>
+                {"All visitations"}
+              </Button>
+            </View>
+          )}
           <ChurchesList data={visitations} />
         </View>
       </View>

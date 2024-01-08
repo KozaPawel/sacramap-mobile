@@ -18,10 +18,10 @@ function ChurchesList({ data }) {
         return (
           <TouchableOpacity
             onPress={() => {
+              navigation.navigate("MapTab", { screen: "Map" });
               DeviceEventEmitter.emit("event.churchClicked", {
                 item,
               });
-              navigation.goBack();
             }}
           >
             <ScrollView style={styles.container}>
