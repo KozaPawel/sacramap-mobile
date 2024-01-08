@@ -1,18 +1,21 @@
 import { useState } from "react";
-import { Alert, StyleSheet, View } from "react-native";
+import { ActivityIndicator, Alert, StyleSheet, View } from "react-native";
 
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
 import ChurchesList from "../components/ChurchesList";
 import { fetchCityChurches } from "../util/fetch";
+import { Colors } from "../constants/colors";
 
 function SearchScreen() {
   const [searchValue, setSearchValue] = useState("");
   const [fetchedChurches, setFetchedChurches] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
 
   async function getSearchedChurches() {
     if (searchValue.length > 2) {
       try {
+        setIsSearching(true);
         setFetchedChurches([]);
 
         const churches = await fetchCityChurches(searchValue);
@@ -25,6 +28,8 @@ function SearchScreen() {
     } else {
       Alert.alert("To search for a city", "Type at least 3 letters");
     }
+
+    setIsSearching(false);
   }
 
   return (
@@ -42,7 +47,11 @@ function SearchScreen() {
               getSearchedChurches();
             }}
           >
-            {"Search"}
+            {isSearching ? (
+              <ActivityIndicator color={Colors.background} size="small" />
+            ) : (
+              "Search"
+            )}
           </Button>
         </View>
       </View>
