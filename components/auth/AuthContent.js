@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Alert, StyleSheet, View } from "react-native";
+import { Alert, Image, StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import FlatButton from "../ui/FlatButton";
 import AuthForm from "./AuthForm";
@@ -54,20 +55,26 @@ function AuthContent({ isLogin, onAuthenticate }) {
   }
 
   return (
-    <View style={styles.authContent}>
-      <AuthForm
-        isLogin={isLogin}
-        onSubmit={submitHandler}
-        credentialsInvalid={credentialsInvalid}
-      />
-      <View style={styles.buttons}>
-        <FlatButton onPress={switchAuthModeHandler}>
-          {isLogin
-            ? "Don't have an account yet? Sign up"
-            : "Have an account already? Log in"}
-        </FlatButton>
+    <KeyboardAwareScrollView>
+      <View style={styles.authContent}>
+        <Image
+          style={{ width: 200, height: 100, alignSelf: "center" }}
+          source={require("../../assets/adaptive-icon.png")}
+        />
+        <AuthForm
+          isLogin={isLogin}
+          onSubmit={submitHandler}
+          credentialsInvalid={credentialsInvalid}
+        />
+        <View style={styles.buttons}>
+          <FlatButton onPress={switchAuthModeHandler}>
+            {isLogin
+              ? "Don't have an account yet? Sign up"
+              : "Have an account already? Log in"}
+          </FlatButton>
+        </View>
       </View>
-    </View>
+    </KeyboardAwareScrollView>
   );
 }
 

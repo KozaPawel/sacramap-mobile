@@ -32,12 +32,12 @@ function AuthStack() {
       <Stack.Screen
         name="Login"
         component={LoginScreen}
-        options={{ unmountOnBlur: true }}
+        options={{ unmountOnBlur: true, headerShown: false }}
       />
       <Stack.Screen
         name="Signup"
         component={SignupScreen}
-        options={{ unmountOnBlur: true }}
+        options={{ unmountOnBlur: true, headerShown: false }}
       />
     </Stack.Navigator>
   );
