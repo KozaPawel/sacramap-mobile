@@ -58,7 +58,7 @@ function AuthContent({ isLogin, onAuthenticate }) {
     <KeyboardAwareScrollView>
       <View style={styles.authContent}>
         <Image
-          style={{ width: 200, height: 100, alignSelf: "center" }}
+          style={{ width: 200, height: 125, alignSelf: "center" }}
           source={require("../../assets/adaptive-icon.png")}
         />
         <AuthForm

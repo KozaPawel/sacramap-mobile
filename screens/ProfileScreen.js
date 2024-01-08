@@ -43,7 +43,10 @@ function ProfileScreen() {
           ? setVisitations(uniqueArray(response))
           : setVisitations(uniqueArray(response).slice(0, howMany));
       } else {
-        Alert.alert("Could not fetch user data");
+        Alert.alert(
+          "Could not fetch user data",
+          "Check your internet connection or try restarting app"
+        );
       }
     }
 

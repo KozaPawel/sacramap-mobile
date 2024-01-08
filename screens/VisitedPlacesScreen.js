@@ -34,7 +34,10 @@ function VisitedPlacesScreen() {
 
         setVisitations(uniqueArray(response));
       } else {
-        Alert.alert("Could not fetch visited places");
+        Alert.alert(
+          "Could not fetch visited places",
+          "Check your internet connection or try restarting app"
+        );
       }
     }
 

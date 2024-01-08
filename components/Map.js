@@ -8,7 +8,7 @@ import LoadingOverlay from "../components/ui/LoadingOverlay";
 import FloatingButton from "./ui/FloatingButton";
 import ChurchInfoModal from "./ChurchInfoModal";
 
-function Map({ churches }) {
+function Map({ churches, isFetching }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalData, setModalData] = useState([]);
 
@@ -38,7 +38,7 @@ function Map({ churches }) {
     setModalData(data);
   }
 
-  if (churches.length === 0) {
+  if (churches.length === 0 && isFetching) {
     return <LoadingOverlay message="Fetching all churches..." />;
   } else {
     return (

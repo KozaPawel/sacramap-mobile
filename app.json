@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "sacramap-mobile",
-    "slug": "sacramap-mobile",
+    "name": "sacramap",
+    "slug": "sacramap",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -9,7 +9,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#fdfdff"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -18,9 +18,15 @@
       "supportsTablet": true
     },
     "android": {
+      "versionCode": 1,
+      "config": {
+        "googleMaps": {
+          "apiKey": "BEFORE-DEPLOY-CHANGE-TO-GOOGLE-API-KEY"
+        }
+      },
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#fdfdff"
       }
     },
     "web": {
