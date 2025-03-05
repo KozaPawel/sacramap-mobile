@@ -1,10 +1,24 @@
 # sacramap
 
+This mobile application lets you mark visited churches in Poland.
+
+## Features
+
+- Marking visited churches
+- Searching for every church in a city
+- Map with every church
+- Map with visited churches
+- List of visited churches
+
+## Build with
+- React Native
+- Expo Go
+
 ## Running App locally
 
 ### 1. Clone repository
 
-`git clone https://github.com/GrunTrain/sacramap-mobile`
+`git clone https://github.com/KozaPawel/sacramap-mobile`
 
 ### 2. Move into directory you've created
 
