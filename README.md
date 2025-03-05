@@ -6,6 +6,7 @@ This mobile application lets you mark visited churches in Poland.
 
 - Marking visited churches
 - Searching for every church in a city
+- Clicking on searched/visited church navigates to his marker on a map
 - Map with every church
 - Map with visited churches
 - List of visited churches
